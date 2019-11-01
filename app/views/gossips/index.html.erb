@@ -36,7 +36,7 @@
         
         <div class="col-auto d-flex justify-content-center align-items-center text-black-50 m-0 p-0">
           <%= form_tag gossip_gossiplike_index_path(nb.id), method: "post" do %>
-            <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-plus fa-2x spec ml-3 mr-3"></button>
+          <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-plus fa-2x spec ml-3 mr-3"></button>
           <%end%>
           <%= form_tag gossip_path(nb), method: "delete" do %>
           <button  type="submit" id="fontaws" name="<%=nb%>" class="fas fa-times fa-2x spec mr-3"></button>
@@ -73,12 +73,12 @@
            <br>
            Il y'a <%=User.all.size%> utilisateurs.
 
-          </p>
-        </div>
-      </div>
+         </p>
+       </div>
+     </div>
 
-      <input type="number" placeholder="x10" step="10" min="0" max="100" id="number">
-    </div>
-  </div>
+     <input type="number" placeholder="x10" step="10" min="0" max="100" id="number">
+   </div>
+ </div>
 </div>
 

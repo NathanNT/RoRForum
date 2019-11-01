@@ -40,25 +40,36 @@ class GossipsController < ApplicationController
       # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
       # pour info, le contenu de ce formulaire sera accessible dans le hash params
       # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
+
       @gossip = Gossip.find(id = params[:id].to_i)
-      puts @gossip
-      puts "fjejfejfj"
-      puts params[:title]
+
+if @gossip.user_id == current_user
       if @gossip.update('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
         Gossip.order('id ASC')
         redirect_to "/gossips"
       else
-        render :edit
+        redirect_to "/gossips"
       end
     end
+end
 
     def destroy
       # Méthode qui récupère le potin concerné et le détruit en base
-      @gossip = Gossip.find(id = params[:id].to_i)
-      if @gossip.destroy
+            @gossip = Gossip.find(id = params[:id].to_i)
+
+      puts @gossip.user_id 
+      puts current_user.id
+
+      if @gossip.user_id == current_user.id
+
+        @gossip.destroy
+        redirect_to "/gossips"
           @@num2="1"
-      end
+        else
       redirect_to "/gossips"
+      end
+
+  
     end
 
 
