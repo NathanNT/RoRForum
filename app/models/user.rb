@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_secure_password
   belongs_to :city
   has_many :gossips
   has_many :comments
@@ -11,6 +12,7 @@ class User < ApplicationRecord
   format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "email adress please" }
   validates :first_name, length: { minimum: 2 }
   validates :last_name, length: { minimum: 2 }
-  has_secure_password
+
   validates :password, presence: true, length: { minimum: 6 }
+
 end
