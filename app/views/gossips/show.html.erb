@@ -16,13 +16,14 @@
         </div>
         <div class="col-auto p-0">
           <div class="row justify-content-end mr-1  ">
+            <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-plus spec mr-2"></i></a>
 
             <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-pen spec"></i></a> <%= form_tag gossip_path(params[:id]), method: "delete" do %>
             <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 mb-4"></button>
             <%end%>
           </div>
           <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> commentaires</span>
-          <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> likes</span>
+          <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:gossip_id =>params[:id].to_i).size%> likes</span>
         </div>
 
 
@@ -38,10 +39,15 @@
         </div>
         <div class="col-auto">
           <div class="row">
+            <%= form_tag gossip_comment_commentlike_index_path(nb.gossip_id,nb.id), method: "post" do %>
+            <button type="submit" id="fontaws" class="fas fa-plus spec mr-2"></button>
+            <%end%>
             <a href="<%=edit_gossip_comment_path(params[:id],nb.id)%>"><i id="fontaws" class="fas fa-pen spec greycolor"></i></a> <%= form_tag gossip_comment_path(params[:id],nb.id), method: "delete" do %>
             <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 greycolor"></button>
-            <%end%>
+            
           </div>
+          <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:comment_id =>nb.id).size%> likes</span>
+          <%end%>
         </div>
         <%end%>
       </div>
@@ -58,8 +64,8 @@
     <div class="col-lg-10">
       <div class="row shadow-sm bg-white justify-content-center rounded-sm p-3 mb-3 text-dark pr-0 m-0">
 
-          <%= form_tag gossip_comments_path(params[:id]), method: "post",class: "w-100 " do %>
-<div class="row d-flex justify-content-center">
+        <%= form_tag gossip_comments_path(params[:id]), method: "post",class: "w-100 " do %>
+        <div class="row d-flex justify-content-center">
           <div class="col-12 input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">Commentaire</span>
@@ -67,7 +73,7 @@
             <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
           </div>
           <button type="submit" name="commit" class="btn btn-primary mt-3">Submit</button>
-          </div>
+        </div>
         <% end %>
         
         <div class="mt-3">

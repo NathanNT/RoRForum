@@ -35,9 +35,9 @@
         </div>
         
         <div class="col-auto d-flex justify-content-center align-items-center text-black-50 m-0 p-0">
-          <form action="/gossips/<%=nb.id%>">
-            <button type="submit" id="fontaws" class="fas fa-plus fa-2x spec ml-3 mr-3"></button>
-          </form>
+          <%= form_tag gossip_gossiplike_index_path(nb.id), method: "post" do %>
+            <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-plus fa-2x spec ml-3 mr-3"></button>
+          <%end%>
           <%= form_tag gossip_path(nb), method: "delete" do %>
           <button  type="submit" id="fontaws" name="<%=nb%>" class="fas fa-times fa-2x spec mr-3"></button>
           <%end%>

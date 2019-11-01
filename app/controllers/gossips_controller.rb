@@ -1,5 +1,5 @@
 class GossipsController < ApplicationController
-
+  before_action :authenticate_user, only: [:index,:new,:create]
   @@num=0
   @@num2=0
   def index
@@ -21,7 +21,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new('user_id' => current_user.user_id,'title' => params[:title],'content' => params[:content])
+    @gossip = Gossip.new('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
 
     if @gossip.save
       redirect_to "/gossips"
@@ -60,4 +60,15 @@ class GossipsController < ApplicationController
       end
       redirect_to "/gossips"
     end
+
+
+  private
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
   end

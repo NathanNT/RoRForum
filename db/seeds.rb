@@ -102,12 +102,5 @@ end
   likes << like
 end
 
-50.times do |x|
-  comment = Comment.create(
-      content: Faker::Lorem.paragraph,
-      user_id: users[rand(0..10-1)].id,
-      comment_id: comments[rand(0..50-1)].id)
-  commentssecond << comment
-end
 
 
