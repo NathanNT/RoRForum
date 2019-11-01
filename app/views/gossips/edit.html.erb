@@ -1,0 +1,58 @@
+ <% if @gossip.errors.any? %>
+ <div class="alert alert-danger" role="alert">
+  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @gossip.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<section class="mb-4">
+  <h2 class="h1-responsive font-weight-bold text-center my-4">Gossip</h2>
+  <p class="text-center w-responsive mx-auto mb-5">Voici la séction gossip :</p>
+  <div class="row p-0 m-0">
+    <div class="row p-0 m-0">
+      <div class="col-md-12">
+        <div class="md-form mb-0">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <ul class="list-unstyled mb-0">
+        <li><%= form_tag url_for(action: 'update'), method: "patch" do %>
+
+          <div class="row justify-content-center p-0 m-0">
+            <div class="col-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Nouveau titre</span>
+                </div>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center p-0 m-0">
+            <div class="col-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Nouveau contenue</span>
+                </div>
+                <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+          </div>
+          <button type="submit" name="commit" class="btn btn-primary rounded-0">Submit</button>
+
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+

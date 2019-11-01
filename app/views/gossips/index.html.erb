@@ -1,0 +1,84 @@
+  <% if @numero == "1" %>
+  <div class="alert alert-success" role="alert">
+    <a>Gossip crée avec succes</a>
+  </div>
+  <% @numero = "0" %>
+  <% end %>
+  <%i=0%>
+
+  <% if @numero2 == "1" %>
+  <div class="alert alert-success" role="alert">
+    <a>Gossip supprimé avec succes</a>
+  </div>
+  <% @numero2 = "0" %>
+  <% end %>
+  <%z=0%>
+
+  <div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+
+      <div class="col-xl-6 offset-xl-1" >
+
+        <%Gossip.all.order("created_at DESC").each do |nb|%>
+        <div class="row shadow-sm bg-white justify-content-between rounded-sm pb-3 pt-3 pl-3 mb-3 text-dark border pr-0 m-0">
+         <div class="col border-right">
+
+          <span class="font-italic mogos">
+           <a class="spec" href="user/<%=nb.user.id%>"> <%=nb.user.first_name%> <%=nb.user.last_name%></a> 
+         </span>
+         <br>
+         <a href="/gossips/<%=nb.id%>" class="link">
+          <%=nb.title%> 
+          <br>
+          <span class="text-black-50"><%=nb.content%> <span>
+          </a>
+        </div>
+        
+        <div class="col-auto d-flex justify-content-center align-items-center text-black-50 m-0 p-0">
+          <form action="/gossips/<%=nb.id%>">
+            <button type="submit" id="fontaws" class="fas fa-plus fa-2x spec ml-3 mr-3"></button>
+          </form>
+          <%= form_tag gossip_path(nb), method: "delete" do %>
+          <button  type="submit" id="fontaws" name="<%=nb%>" class="fas fa-times fa-2x spec mr-3"></button>
+          <%end%>
+
+
+        </div>
+      </div>
+      <%i=0%>
+      <%end%>
+
+    </div>
+    <div class="col-auto center-block text-center">
+
+      <div class="card bg-light m-0" style="min-width:10rem; max-width: 20rem;">
+        <div class="card-header">Tag</div>
+        <div class="card-body">
+          <h5 class="card-title">Categorie</h5>
+          <p class="card-text">
+            <%Tag.all.each do |spectag|%>
+            <%=spectag.title%>
+            <%end%>
+          </p>
+        </div>
+      </div>
+
+
+      <div class="card bg-light mt-4" style="min-width:10rem; max-width: 20rem;">
+        <div class="card-header">Info</div>
+        <div class="card-body">
+          <h5 class="card-title">Categorie</h5>
+          <p class="card-text">
+           Il y'a <%=Gossip.all.size%> gossips.
+           <br>
+           Il y'a <%=User.all.size%> utilisateurs.
+
+          </p>
+        </div>
+      </div>
+
+      <input type="number" placeholder="x10" step="10" min="0" max="100" id="number">
+    </div>
+  </div>
+</div>
+

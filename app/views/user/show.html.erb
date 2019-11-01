@@ -1,0 +1,30 @@
+<section class="mb-4">
+  <h2 class="h1-responsive font-weight-bold text-center my-4">User</h2>
+  <div class="row">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-form mb-0">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <ul class="list-unstyled mb-0">
+        <li><i class="fas fa-map-marker-alt fa-2x"></i>
+          <%=User.all[params[:id].to_i-1].first_name%> <%=User.all[params[:id].to_i-1].last_name%>
+        </li>
+
+        <li><i class="fas fa-phone mt-4 fa-2x"></i>
+          <%=User.all[params[:id].to_i-1].email%>
+        </li>
+
+        <li><i class="fas fa-envelope mt-4 fa-2x bd"></i>
+          <%=User.all[params[:id].to_i-1].city.name%>
+        </li>
+        <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+          <%=User.all[params[:id].to_i-1].description%>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,81 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="row shadow-sm bg-white justify-content-between rounded-sm p-3 mb-3 text-dark pr-0 m-0">
+
+       <div class="col-9">
+        <span class="font-italic mogos">
+          <%=params[:id]%> | <%=Gossip.find(id= params[:id].to_i).user.first_name%> <%=Gossip.find(id= params[:id].to_i).user.last_name%>
+        </span>
+        <br>
+        <%=Gossip.find(id= params[:id].to_i).title%> 
+        <br>
+        <span class="text-black-50"><%=Gossip.find(id= params[:id].to_i).content%> <span>
+        </div>
+        <div class="col-auto p-0">
+          <div class="row justify-content-end mr-1  ">
+
+            <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-pen spec"></i></a> <%= form_tag gossip_path(params[:id]), method: "delete" do %>
+            <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 mb-4"></button>
+            <%end%>
+          </div>
+          <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> commentaires</span>
+          <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> likes</span>
+        </div>
+
+
+        <%Comment.where(:gossip_id =>params[:id].to_i).order("created_at ASC").each do |nb|%>
+        <div class="col-12 border-top mb-4 mt-4"></div>
+
+        <div class="col-9">
+          <span class="font-italic mogos">
+            <%=nb.user.first_name%> <%=nb.user.first_name%>
+          </span>
+          <br>
+          <%=nb.content%> 
+        </div>
+        <div class="col-auto">
+          <div class="row">
+            <a href="<%=edit_gossip_comment_path(params[:id],nb.id)%>"><i id="fontaws" class="fas fa-pen spec greycolor"></i></a> <%= form_tag gossip_comment_path(params[:id],nb.id), method: "delete" do %>
+            <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 greycolor"></button>
+            <%end%>
+          </div>
+        </div>
+        <%end%>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="row shadow-sm bg-white justify-content-center rounded-sm p-3 mb-3 text-dark pr-0 m-0">
+
+          <%= form_tag gossip_comments_path(params[:id]), method: "post",class: "w-100 " do %>
+<div class="row d-flex justify-content-center">
+          <div class="col-12 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Commentaire</span>
+            </div>
+            <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
+          </div>
+          <button type="submit" name="commit" class="btn btn-primary mt-3">Submit</button>
+          </div>
+        <% end %>
+        
+        <div class="mt-3">
+        </div>
+
+
+      </div>
+    </div>
+
+
+
