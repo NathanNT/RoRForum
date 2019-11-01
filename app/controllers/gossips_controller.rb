@@ -43,19 +43,19 @@ class GossipsController < ApplicationController
 
       @gossip = Gossip.find(id = params[:id].to_i)
 
-if @gossip.user_id == current_user
-      if @gossip.update('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
-        Gossip.order('id ASC')
-        redirect_to "/gossips"
-      else
-        redirect_to "/gossips"
+      if @gossip.user_id == current_user.id
+        if @gossip.update('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
+          Gossip.order('id ASC')
+          redirect_to "/gossips"
+        else
+          redirect_to "/gossips"
+        end
       end
     end
-end
 
     def destroy
       # Méthode qui récupère le potin concerné et le détruit en base
-            @gossip = Gossip.find(id = params[:id].to_i)
+      @gossip = Gossip.find(id = params[:id].to_i)
 
       puts @gossip.user_id 
       puts current_user.id
@@ -64,22 +64,22 @@ end
 
         @gossip.destroy
         redirect_to "/gossips"
-          @@num2="1"
-        else
-      redirect_to "/gossips"
+        @@num2="1"
+      else
+        redirect_to "/gossips"
       end
 
-  
+
     end
 
 
-  private
+    private
 
-  def authenticate_user
-    unless current_user
-      flash[:danger] = "Please log in."
-      redirect_to new_session_path
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Please log in."
+        redirect_to new_session_path
+      end
     end
-  end
 
   end
