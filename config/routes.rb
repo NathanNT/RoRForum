@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   resources :gossips do
   	resources :comments do
-  		resources :commentlike, only: [:create]
+  		resources :commentlike, only: [:create, :destroy]
   	end
-  	resources :gossiplike, only: [:create]
+  	resources :gossiplike, only: [:create, :destroy]
   end
   resources :contact, only: [:index]
   resources :team, only: [:index]
   resources :user, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
-  
+
 end

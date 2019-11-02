@@ -1,12 +1,9 @@
 class GossipsController < ApplicationController
   before_action :authenticate_user, only: [:index,:new,:create]
-  @@num=0
-  @@num2=0
+  layout "application", except: [:new, :create]
+
   def index
-    @numero = @@num
-    @numero2 = @@num2
-    @@num2=0
-    @@num=0
+
   end
 
   def show
@@ -25,8 +22,7 @@ class GossipsController < ApplicationController
 
     if @gossip.save
       redirect_to "/gossips"
-      @@num = "1"
-    else
+    else  
       render 'new'
     end
   end

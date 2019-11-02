@@ -17,7 +17,7 @@
         <div class="col-auto p-0">
           <div class="row justify-content-end mr-1  ">
             <%= form_tag gossip_gossiplike_index_path(Gossip.find(id= params[:id].to_i).id), method: "post" do %>
-            <button type="submit" id="fontaws" class="fas fa-plus spec mr-2"></i></button>
+            <button type="submit" id="fontaws" class="far fa-heart spec mr-2"></i></button>
             <%end%>
             <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-pen spec"></i></a> <%= form_tag gossip_path(params[:id]), method: "delete" do %>
             <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 mb-4"></button>
@@ -41,7 +41,7 @@
         <div class="col-auto">
           <div class="row">
             <%= form_tag gossip_comment_commentlike_index_path(nb.gossip_id,nb.id), method: "post" do %>
-            <button type="submit" id="fontaws" class="fas fa-plus spec mr-2"></button>
+            <button type="submit" id="fontaws" class="far fa-heart spec mr-2"></button>
             <%end%>
             <a href="<%=edit_gossip_comment_path(params[:id],nb.id)%>"><i id="fontaws" class="fas fa-pen spec greycolor"></i></a> <%= form_tag gossip_comment_path(params[:id],nb.id), method: "delete" do %>
             <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 greycolor"></button>

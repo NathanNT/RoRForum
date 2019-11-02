@@ -5,15 +5,17 @@ class UserController < ApplicationController
     end
 
    def new
+   	@user = User.new()
    end
 
    def create
-    @user = User.create(age: "18",city_id: 3,first_name: params[:firstname],last_name: params[:secondname],password: params[:password],password_confirmation: params[:passwordverif],description: params[:bio],email: params[:email] )
+   	puts params[:password]
+    @user = User.new(age: "18",city_id: 3,first_name: params[:firstname],last_name: params[:secondname],password: params[:password],password_confirmation: params[:passwordverif],description: params[:bio],email: params[:email] )
     if @user.save
       redirect_to "/gossips"
-      @@num = "1"
     else
-      render 'new' 
+      render: new
+      
     end
   end
 

@@ -7,7 +7,7 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -16,75 +16,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
- <nav class="navbar navbar-fixed-top fixed-top navbar-expand-lg navbar-light bg-light p-3 pl-4">
-  <a class="navbar-brand pr-4 border-right" href="#">The Gossip Project </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/gossips">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/contact">Contact</a>
-      <a class="nav-item nav-link" href="/team">Team</a>
-      <a class="nav-item nav-link" href="/gossips/new">Create Gossip</a>
-      <a class="nav-item nav-link disabled" href="#"></a>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">THE GOSSIP PROJECT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-item nav-link active" href="/gossips">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/gossips/new">Create Gossip</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <% if current_user == nil %>
+        <a href="/sessions/new"><button  type="submit" class="btn btn-primary rounded-0">Sign up</button></a>
+        <a href="/user/new"><button  type="submit" class="btn btn-success ml-2 rounded-0">Sign in</button></a>
+        <%else%>
+        <%= form_tag session_path(current_user.id), method: "delete" do %>
+        <button  type="submit" class="btn btn-danger rounded-0">Log out</button>
+        <a href="/user/<%=current_user.id%>"><button class="btn btn-primary ml-2 rounded-0">Mon profil</button></a>
+        <%end%>
 
+
+        <%end%>
+
+      </span>
     </div>
+  </nav>
 
-  </div>
-<% if current_user == nil %>
-  <a href="/sessions/new"><button  type="submit" class="btn btn-primary rounded-0">Sign up</button></a>
-  <a href="/user/new"><button  type="submit" class="btn btn-success ml-2 rounded-0">Sign in</button></a>
-  <%else%>
-  <%= form_tag session_path(current_user.id), method: "delete" do %>
-  <button  type="submit" class="btn btn-danger rounded-0">Log out</button>
-  <%end%>
-  <a href="/user/<%=current_user.id%>"><button  type="submit" class="btn btn-primary ml-2 rounded-0">Mon profil</button></a>
+  <%= yield %>
+  <style>
+   body { 
+    background: #ecf0ef;
+    width: 100%!important;
+    height: 100%!important; }
+    .centerBlock {
+      display: table;
+      margin: auto;
 
-<%end%>
-</nav>
-</div>
-<%= yield %>
-<style>
- body { 
-  background: #ecf0ef;
-  margin-top: 100px;
-  width: 100%!important;
-  height: 100%!important; }
-  .centerBlock {
-    display: table;
-    margin: auto;
+    } 
 
-  } 
+    #fontaws {
 
-  #fontaws {
-
-    background: none!important;
-    border: none;
-    padding: 0!important;
-    /*optional*/
-    /*input has OS specific font-family*/
-    color: #B7B7B7!important;
-    text-decoration: none!important;
-    cursor: pointer;
-  }
-
-  .mogos {
-   font-size: 12px;
- }
- .spec { color: inherit;
-  text-decoration: none;
-  color: #B7B7B7;
-  outline: none!important; } 
-  .link { color: inherit;
-    text-decoration: none;
-    color: black!important;
-    outline: none!important; } 
-    html {
-      width: 100%;
-      height: 100%;
+      background: none!important;
+      border: none;
+      padding: 0!important;
+      /*optional*/
+      /*input has OS specific font-family*/
+      color: #B7B7B7!important;
+      text-decoration: none!important;
+      cursor: pointer;
     }
-  </style>  
 
-</body>
-</html>
+    .mogos {
+     font-size: 12px;
+   }
+   .spec { color: inherit;
+    text-decoration: none;
+    color: #B7B7B7;
+    outline: none!important; } 
+    .link { color: inherit;
+      text-decoration: none;
+      color: black!important;
+      outline: none!important; }
+
+
+      html {
+        width: 100%;
+        height: 100%;
+      }
+    </style>  
+
+  </body>
+  </html>
