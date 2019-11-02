@@ -1,97 +1,63 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-Projet : The Gossip Project, les premières views
-
-Note : le projet est à faire en pair-programming.
-
+Projet : Gossip Project : Facebook style
+  
 1. Introduction
-Bienvenue dans ta première application Rails qui déchire ! Aujourd'hui tu vas commencer un projet qui te prendra toute la semaine : The Gossip Project. Nous allons te demander de reprendre le backend de la semaine dernière (en modifiant quelques éléments), puis tu vas ajouter les bons controllers, les bonnes vues, pour qu'à la fin de la semaine vous puissiez commérer en toute tranquilité.
+Ça y est ! Tu commences à maîtriser les fondamentaux de Rails, les termes de MVC, routes, params et bases de données te sont familiers et tu commences à être fier des quelques applications que tu as codé cette semaine.
 
-Voici le programme de la semaine :
+Aujourd'hui, nous allons un peu plus loin avec notre application Gossip Project, en rajoutant des features un peu plus stylées que tu pourras peut-être réutiliser pour l'architecture de ton projet final.
 
-Aujourd'hui sera consacré aux premières pages de l'application : quelques pages statiques et les pages potins
-Demain sera consacré à la création d'un potin
-Mercredi sera consacré au CRUD complet des potins
-Jeudi sera consacré aux commentaires des potins, aux likes des potins, et à la gestion d'utilisateurs
-Vendredi sera consacré à l'identification des potins
-Ce programme consiste en gros à te faire ajouter les controllers et les vues aux models solides que tu as codés la semaine dernière. Comment ajouter du front aux bases de données. Puis la semaine prochaine nous verrons les techniques avancées, comme l'envoi d'email, la gestion des photos de profil, la gestion du front, afin que tu ressortes de ces trois semaines de Rails avec un rendu professionnel.
+Pour commencer, tu peux reprendre ton app d'hier car la base de données reste globalement la même.
 
+Ce projet sera peu guidé, je vais juste te donner une liste de fonctionnalités que ton app devra avoir et tu vas les implémenter. Celles-ci reprendrons essentiellement ce que tu as vu cette semaine et la semaine dernière.
+
+Voici ce que tu vas devoir implémenter dans l'application :
+
+Nous allons commencer par un CRUD succinct des utilisateurs : création
+Nous allons mettre en place un système de login / logout avec une page de connexion
+Nous allons faire en sorte que les potins créés soient associés à l'utilisateur en cours, idem pour les commentaires
+Nous allons rendre impossible la création de potin si l'utilisateur n'est pas connecté. Idem pour show du potin
+Édition et destruction des potins
+Puis nous allons mettre en place le système de likes
 2. Le projet
-Nous allons commencer aujourd'hui par créer les premières pages :
+2.1. Création d'utilisateurs
+Fais donc une création d'utilisateur, avec la notion de mot de passe. Bien entendu, le mot de passe ne sera pas stocké en clair dans ta base de données.
 
-La page d'accueil, bien entendu. Cette page d'accueil affichera tous les potins créés
-La page qui présente l'équipe de The Gossip Project, aka toi et ton binome
-La page de contact où tu vas balancer une superbe adresse de contact
-Une page de bienvenue, qui accueille l'utilisateur en fonction du nom passé dans l'URL
-Dans la page d'accueil, il sera possible de cliquer sur chaque potin pour en "Voir plus", ce qui aura pour effet d'aller sur la page du potin.
+Le lien pour s'inscrire devra être sur la navbar. Et une fois l'utilisateur inscrit l'utilisateur sera redirigé vers la page d'accueil.
 
-Enfin, puisque c'est toi, nous allons mettre du CSS dans le site, grâce notamment à Bootstrap.
+2.2. Login / logout
+2.2.1. Login
+Nous allons mettre un écran de connexion à l'application qui demandera email et mot de passe. Cet écran va créer une session si tu arrives à authentifier l'utilisateur avec l'email ou le mot de passe, puis le rediriger vers la page d'accueil s'il arrive à se connecter. Cela sera relié au sessions_controller (méthodes #new et #create)
 
-2.1. Les bases de l'application : installation et models
-Ce projet te suivra tout au long de cette semaine, mais nous allons te demander de ne pas perdre le rythme des migrations. Ainsi, nous allons te demander de créer une nouvelle application the-gossip-project (avec PostgreSQL), puis d'importer les migrations, models, et seed de l'ancien exercice. Cela permettra de te replonger en douceur dans le bain des bases de données sans te faire perdre trop de temps.
+Aussi, à la création de l'utilisateur, il faut login l'utilisateur.
 
-2.2. Les premières pages : présentation et contact
-Tu vas devoir créer deux pages :
+2.2.2. Logout
+Maintenant il faut faire sessions#destroy. Code la méthode.
 
-Une page team, qui présente l'équipe. Elle sera sur l'uri /team
-Une page contact, qui dit comment contacter l'équipe. Elle sera sur l'uri /contact
-Écris un truc simple dans la page, du genre : "voici notre équipe lol mdr 😇❤️😻" pour team par exemple.
+2.2.3. Login / Signup
+Dans la majorité des sites (le notre inclus), tu pourras retrouver en haut à droite un bouton qui change en fonction de l'état de l'utilisateur
 
-2.3. Un peu de mise en forme SVP merci
-2.3.1. Du CSS
-Histoire de ne pas être trop pouilleux, nous allons te demander d'ajouter du CSS. Comment ajouter du CSS vous me dites ? Simple, va dans app/assets/stylesheets/application.css. Puis écris ton CSS en bas du document. Ce CSS concernera toute ton application.
+Si l'utilisateur n'est pas connecté, il y aura un dropdown "S'inscrire / Se connecter", avec un bouton pour lien (users#new) et un lien pour se connecter (sessions#new)
+Si l'utilisateur est connecté, il y aura un bouton pour se déconnecter (sessions#destroy)
+Ta mission est mettre en place ceci.
 
-On va rajouter un peu de css à cette app, en y mettant Bootstrap. La technique la plus simple et la plus réputée consiste à utiliser le CDN, et coller la ou les lignes de CDN dans le head de ton fichier app/views/layout/application.html.erb.
+2.3. Création des potins
+Quand tu créés un potin, ce dernier est associé à un utilisateur de ta base. Arrange-toi pour faire en sorte que le potin créé soit associé à l'utilisateur connecté. Fais de même avec les commentaires.
 
-2.3.2. Un header
-Ajoute un header dans toutes les pages de ton application. Celui que tu veux.
+2.4. Impossible de commérer sans inscription
+Si actuellement tu crées un potin alors que le visiteur n'est pas connecté, cela va te renvoyer un bug. C'est pas incroyable. Il faut donc faire en sorte que les méthodes #new et #create vérifient que l'utilisateur est bien connecté avant de se lancer. Si ce dernier n'est pas connecté, l'application devra le renvoyer vers l'écran de login. Fais la même pour l'affichage du potin, et la création de commentaires.
 
-2.3.3. Des liens
-Maintenant, dans le header, mets-y les liens pour les pages team et contact.
+indice : before_action
 
-2.4. URL cachée, la bienvenue ;)
-Cette partie sera un chouilla plus tricky, puisqu'elle te demandera de jouer avec les fameux params. Tu as entendu parler du principe des "Landing Pages", un truc cool avec une page adaptée à la cible potentielle qui viendrait sur ton application. Nous allons donc faire cela.
+2.5. Édition et destruction des potins
+Pour le moment, tout le monde peut éditer un potin. Arrange-toi pour que le bouton pour pouvoir éditer le potin n'apparaisse QUE si l'utilisateur connecté est le créateur du potin. De plus, les méthodes gossips#edit, gossips#update et gossips#destroy doivent vérifier que le current_user soit bien le créateur du potin : impossible de faire ces actions (afficher le formulaire d'édition du potin, pouvoir éditer le potin, pouvoir détruire le potin) si ce n'est pas le créateur qui le fait !
 
-En gros ce serait une page qui aurait une url du genre welcome/first_name, et quand la personne irait sur cette page, cette personne serait accueillie par un truc du genre :
+2.6. Like that
+Nous allons mettre en place un système de likes, yahou ! Il faut que l'on soit capable de liker un potin sur la page d'index des potins, sur la page des villes (qui affiche les potins pour une ville donnée), ainsi que sur la page d'affichage d'un potin.
 
-BIENVENUE first_name ! Ici c'est notre super site de potins, il est chouette, non ?
+Le like sera attribué à l'utilisateur en cours (comme Facebook) donc il est impossible de liker si le visiteur n'est pas connecté. Enfin, sur les pages mentionnées plus haut, insère aussi un petit espace qui dit le nombre de likes d'un potin.
 
-2.5. Page d'accueil : la liste des potins
-La page d'accueil doit souhaiter la bienvenue au visiteur, puis afficher les potins que l'on a en base, en n'affichant que leur author.first_name, et leur title. Évidemment, un lien vers la page d'accueil doit être mis dans le header de l'application.
+Pour finir : il est possible de déliker un potin.
 
-2.6. Afficher un potin
-Allez, dernier élément : la page qui affiche les potins. Chaque potin en base doit avoir une page dédiée, qui affiche les détails de son auteur (avec un lien pour aller sur la page de l'auteur), son title, son content, puis la date de création.
+3.Rendu attendu
+Un gossip project qui déchire !
 
-Enfin, sur la page d'accueil qui montre tous les potins, nous pourrons trouver pour chaque potin affiché le lien pour sa page.
-
-2.7. Afficher un utilisateur
-Sur chaque page potin, nous avons un lien pour afficher la page profil de son utilisateur. La page profil devra afficher les informations importantes de l'utilisateur.
-
-2.8. Un plus joli display
-Pour la page d'accueil, ce serait quand même plus sympa d'avoir les potins dans des cards bootstrap, non ? Puis n'hésite pas à regarder si tu vois d'autres éléments sympas à ajouter dans ton application 😉
-
-3. Rendu attendu
-Une application the_gossip_project qui affiche quelques pages statiques, un système de landing pages personnalisées, un index et un show de potins. Le tout avec Bootstrap et un header qui a les bons liens.
+⚠ il est interdit d'utiliser une gem d'authentification comme Devise ou Clearance. Seule bcrypt est autorisée.
