@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :user, only: [:show, :new, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
+  get '/',to: 'static#index'
+
 end
