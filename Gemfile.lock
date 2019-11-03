@@ -207,7 +207,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
-  pg (~> 0.18)
+  pg (>= 0.18)
   puma (~> 3.11)
   rails (~> 5.2.3)
   sass-rails (~> 5.0)
