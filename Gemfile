@@ -66,11 +66,13 @@ gem 'table_print'
 gem "font-awesome-rails"
 
 
-group :development, :test do
-  gem 'sqlite3'
+group :development do 
+    gem 'sqlite3'        
 end
 
-  gem 'pg', '~> 0.18'
-
-
+group :production do    
+    gem 'pg'
+    gem 'rails_12factor'
+    gem 'heroku-deflater'   
+end
 
