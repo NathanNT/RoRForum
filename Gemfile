@@ -66,7 +66,6 @@ gem 'faker'
 gem 'table_print'
 gem "font-awesome-rails"
 
-gem 'sqlite3'
 
 group :development, :test do
   gem 'sqlite3'
