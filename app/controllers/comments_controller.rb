@@ -4,12 +4,7 @@ class CommentsController < ApplicationController
 
  def create
   @comment = Comment.new('user_id' => 1,  'gossip_id' => 1,'content' => "mofkgos")
-  puts "bongos"
-  puts params[:gossip_id]
-  puts params[:content]
-
   if @comment.save
-    redirect_to "/gossips/#{params[:gossip_id]}"
   end
 end
 
