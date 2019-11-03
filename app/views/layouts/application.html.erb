@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Thegossipproject</title>
+  <title>The Gossip Project</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -17,7 +17,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-    <a class="navbar-brand" href="#">THE GOSSIP PROJECT</a>
+    <a class="navbar-brand pl-5 pr-5 border-right" href="#">THE GOSSIP PROJECT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,8 +38,8 @@
       </ul>
       <span class="navbar-text">
         <% if current_user == nil %>
-        <a href="/sessions/new"><button  type="submit" class="btn btn-primary rounded-0">Sign up</button></a>
-        <a href="/user/new"><button  type="submit" class="btn btn-success ml-2 rounded-0">Sign in</button></a>
+        <a href="/sessions/new"><button  type="submit" class="btn btn-primary rounded-0">Sign in</button></a>
+        <a href="/user/new"><button  type="submit" class="btn btn-success ml-2 rounded-0">Sign up</button></a>
         <%else%>
         <%= form_tag session_path(current_user.id), method: "delete" do %>
         <button  type="submit" class="btn btn-danger rounded-0">Log out</button>

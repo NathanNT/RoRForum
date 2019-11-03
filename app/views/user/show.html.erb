@@ -1,30 +1,33 @@
-<section class="mb-4">
-  <h2 class="h1-responsive font-weight-bold text-center my-4">User</h2>
-  <div class="row">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="md-form mb-0">
+<div class="mega container d-flex h-100 w-100 justify-content-center align-items-center">
+<div class="container">
+    <div class="span3">
+        <center>
 
+    <!-- Modal -->
+
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-end">
+                    <h4 class="modal-title" id="myModalLabel">Utilisateur</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <h3 class="media-heading"> <%= User.find(params[:id]).first_name %> <%= User.find(params[:id]).last_name %> <small><%= User.find(params[:id]).city.name %></small></h3>
+                    </center>
+                    <hr>
+                    <center>
+                    <p><strong>Bio: </strong><br>
+                        <%= User.find(params[:id]).description %></p>
+                    <br>
+                    <p>Email : <%= User.find(params[:id]).email %> </p>
+                    <p>Age : <%= User.find(params[:id]).age %> </p>
+                    <p></p>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Les postes de <%= User.find(params[:id]).first_name %> </button>
+                    </center>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-12 text-center">
-      <ul class="list-unstyled mb-0">
-        <li><i class="fas fa-map-marker-alt fa-2x"></i>
-          <%=User.all[params[:id].to_i-1].first_name%> <%=User.all[params[:id].to_i-1].last_name%>
-        </li>
-
-        <li><i class="fas fa-phone mt-4 fa-2x"></i>
-          <%=User.all[params[:id].to_i-1].email%>
-        </li>
-
-        <li><i class="fas fa-envelope mt-4 fa-2x bd"></i>
-          <%=User.all[params[:id].to_i-1].city.name%>
-        </li>
-        <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-          <%=User.all[params[:id].to_i-1].description%>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+         </div>

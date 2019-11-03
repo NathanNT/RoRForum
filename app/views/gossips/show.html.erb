@@ -1,62 +1,106 @@
 
-<div class="container mt-5">
+<div class="container" style="padding-top: 150px">
   <div class="row">
     <div class="col-lg-1"></div>
     <div class="col-lg-10">
-      <div class="row shadow-sm bg-white justify-content-between rounded-sm p-3 mb-3 text-dark pr-0 m-0">
+      <% if GossipTag.where('gossip_id' => params[:id]).any?%>
+     <div class="col-12 bg-dark text-center pb-2 pt-1">
 
-       <div class="col-9">
-        <span class="font-italic mogos">
-          <%=params[:id]%> | <%=Gossip.find(id= params[:id].to_i).user.first_name%> <%=Gossip.find(id= params[:id].to_i).user.last_name%>
-        </span>
-        <br>
-        <%=Gossip.find(id= params[:id].to_i).title%> 
-        <br>
-        <span class="text-black-50"><%=Gossip.find(id= params[:id].to_i).content%> <span>
-        </div>
-        <div class="col-auto p-0">
-          <div class="row justify-content-end mr-1  ">
-            <%= form_tag gossip_gossiplike_index_path(Gossip.find(id= params[:id].to_i).id), method: "post" do %>
-            <button type="submit" id="fontaws" class="far fa-heart spec mr-2"></i></button>
-            <%end%>
-            <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-pen spec"></i></a> <%= form_tag gossip_path(params[:id]), method: "delete" do %>
-            <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 mb-4"></button>
-            <%end%>
-          </div>
-          <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> commentaires</span>
-          <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:gossip_id =>params[:id].to_i).size%> likes</span>
-        </div>
-
-
-        <%Comment.where(:gossip_id =>params[:id].to_i).order("created_at ASC").each do |nb|%>
-        <div class="col-12 border-top mb-4 mt-4"></div>
-
-        <div class="col-9">
-          <span class="font-italic mogos">
-            <%=nb.user.first_name%> <%=nb.user.first_name%>
-          </span>
-          <br>
-          <%=nb.content%> 
-        </div>
-        <div class="col-auto">
-          <div class="row">
-            <%= form_tag gossip_comment_commentlike_index_path(nb.gossip_id,nb.id), method: "post" do %>
-            <button type="submit" id="fontaws" class="far fa-heart spec mr-2"></button>
-            <%end%>
-            <a href="<%=edit_gossip_comment_path(params[:id],nb.id)%>"><i id="fontaws" class="fas fa-pen spec greycolor"></i></a> <%= form_tag gossip_comment_path(params[:id],nb.id), method: "delete" do %>
-            <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 greycolor"></button>
-            
-          </div>
-          <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:comment_id =>nb.id).size%> likes</span>
-          <%end%>
-        </div>
-        <%end%>
-      </div>
-
-
+      <%GossipTag.where(gossip_id: params[:id]).each do |spectag|%>
+      <span class="badge badge-pill badge-light"><%=Tag.find(spectag.tag_id).title%></span>
+      <%end%>
     </div>
 
-  </div>
+    <%end%>
+
+    <div class="row shadow-sm bg-white justify-content-between rounded-sm p-3 mb-3 text-dark pr-0 m-0">
+
+     <div class="col-9">
+      <span class="font-italic mogos">
+        <%=params[:id]%> | <%=Gossip.find(id= params[:id].to_i).user.first_name%> <%=Gossip.find(id= params[:id].to_i).user.last_name%>
+      </span>
+      <br>
+      <%=Gossip.find(id= params[:id].to_i).title%> 
+      <br>
+      <span class="text-black-50"><%=Gossip.find(id= params[:id].to_i).content%> <span>
+      </div>
+      <div class="col-auto p-0">
+        <div class="row d-flex justify-content-end mr-0  ">
+
+
+         <%if current_user.has(Gossip.find(id= params[:id].to_i).id)%>       
+         <%= form_tag gossip_gossiplike_path(Gossip.find(id= params[:id].to_i).id), method: "delete" do %>
+         <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-heart spec mr-2"></button>
+         <%end%>
+
+         <%else%>
+
+         <%= form_tag gossip_gossiplike_index_path(Gossip.find(id= params[:id].to_i).id), method: "post" do %>
+         <button type="submit" name="buto" value="yes" id="fontaws" class="far fa-heart spec mr-2"></button>
+         <%end%>
+
+
+         <%end%>
+
+
+
+
+
+
+
+         <a href="<%=edit_gossip_path%>"><i id="fontaws" class="fas fa-pen spec"></i></a> <%= form_tag gossip_path(params[:id]), method: "delete" do %>
+         <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 mb-4"></button>
+         <%end%>
+       </div>
+       <span class="mogos font-italic bg-light p-1 border rounded"><%=Comment.where(:gossip_id =>params[:id].to_i).size%> commentaires</span>
+       <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:gossip_id =>params[:id].to_i).size%> likes</span>
+     </div>
+
+
+     <%Comment.where(:gossip_id =>params[:id].to_i).order("created_at ASC").each do |nb|%>
+     <div class="col-12 border-top mb-4 mt-4"></div>
+
+     <div class="col-9">
+      <span class="font-italic mogos">
+        <%=nb.user.first_name%> <%=nb.user.first_name%>
+      </span>
+      <br>
+      <%=nb.content%> 
+    </div>
+    <div class="col-auto m-0 p-0 text-right">
+      <div class="row m-0">
+
+       <%if current_user.hasc(Comment.find(nb.id).id)%>       
+       <%= form_tag gossip_comment_commentlike_path(nb.gossip_id,nb.id), method: "delete" do %>
+       <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-heart spec mr-2"></button>
+       <%end%>
+
+       <%else%>
+
+       <%= form_tag gossip_comment_commentlike_index_path(nb.gossip_id,nb.id), method: "post" do %>
+       <button type="submit" name="buto" value="yes" id="fontaws" class="far fa-heart spec mr-2"></button>
+       <%end%>
+
+
+       <%end%>
+
+
+
+
+       <a href="<%=edit_gossip_comment_path(params[:id],nb.id)%>"><i id="fontaws" class="fas fa-pen spec greycolor"></i></a> <%= form_tag gossip_comment_path(params[:id],nb.id), method: "delete" do %>
+       <button type="submit" id="fontaws" class="fas fa-times fa-lg spec ml-2 greycolor"></button>
+
+     </div>
+     <span class="mogos font-italic bg-light p-1 border rounded"><%=Like.where(:comment_id =>nb.id).size%> likes</span>
+     <%end%>
+   </div>
+   <%end%>
+ </div>
+
+
+</div>
+
+</div>
 </div>
 
 <div class="container mt-5">

@@ -3,62 +3,74 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
 
   <div class="container-flex w-100 m-0 p-0">
-        <div class="row justify-content-center m-0 p-0">
-      <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded p-0">
-         <% if @gossip.errors.any? %>
- <div class="alert alert-danger m-0" role="alert">
-  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
-  <ul>
-    <% @gossip.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-      </div>
+   <% if @gossip.errors.any? %>
+   <div class="row justify-content-center m-0 p-0">
+    <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded p-0">
+
+     <div class="alert alert-danger m-0" role="alert">
+      <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+      <ul>
+        <% @gossip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <div class="row justify-content-center m-0 p-0" style="margin-top: 100px!important; margin-bottom: 100px!important">
-      <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded pb-4 pt-2" style="margin-top: : 200px">
-        <h2 class="h1-responsive font-weight-bold text-center my-4">Gossip</h2>
-        <p class="text-center w-responsive mx-auto mb-5">Voici la séction gossip :</p>
-        <div class="row m-0 p-0">
-          <div class="col-md-12 text-center">
-            <ul class="list-unstyled mb-0">
-              <li><%= form_tag url_for(action: 'create'), method: "post" do %>
+<% end %>
 
-                <div class="row justify-content-center p-0 m-0">
-                  <div class="col-sm-10 col-lg-4">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Titre</span>
-                      </div>
-                      <input type="text" name="title" id="title" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
-                    </div>
+<div class="row justify-content-center m-0 p-0" style="margin-top: 20px!important; margin-bottom: 20px!important">
+  <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded pb-4 pt-2" style="margin-top: : 200px">
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Gossip</h2>
+    <p class="text-center w-responsive mx-auto mb-5">Voici la séction gossip :</p>
+    <div class="row m-0 p-0">
+      <div class="col-md-12 text-center">
+        <ul class="list-unstyled mb-0">
+          <li><%= form_tag url_for(action: 'create'), method: "post" do %>
+
+            <div class="row justify-content-center p-0 m-0">
+              <div class="col-sm-10 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Titre</span>
                   </div>
+                  <input type="text" name="title" id="title" class="form-control" placeholder="Titre" aria-label="Titre" aria-describedby="basic-addon1">
                 </div>
-                <div class="row justify-content-center p-0 m-0">
-                  <div class="col-sm-10 col-lg-4">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Content</span>
-                      </div>
-                      <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
-                    </div>
+              </div>
+            </div>
+            <div class="row justify-content-center p-0 m-0">
+              <div class="col-sm-10 col-lg-4">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Content</span>
                   </div>
+                  <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
                 </div>
-                <div class="mt-3">
-                </div>
-                <button type="submit" name="commit" class="btn btn-primary rounded-0">Submit</button>
+              </div>
+            </div>
+            <div class="mt-3">
+            </div>
 
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        </div>
+
+            <div class="row justify-content-center p-0 m-0">
+              <div class="col-sm-10 col-lg-4">
+                <div class="input-group">
+                  <%= select_tag 'tag', options_for_select(Tag.all.collect{ |u| [u.title, u.id] }), multiple: true, :class => "form-control mb-5" %>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" name="commit" class="btn btn-primary rounded-0">Submit</button>
+
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 
 

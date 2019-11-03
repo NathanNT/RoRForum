@@ -1,97 +1,112 @@
-  <% if @numero == "1" %>
-  <div class="alert alert-success" role="alert">
-    <a>Gossip crée avec succes</a>
+
+
+<div class="container-fluid" style="margin-top: 130px">
+
+
+  <div class="row justify-content-center mt-5">
+
+
+  <div class="col-xl-6 offset-xl-1" >
+
+    <% if flash[:succes] %>
+
+     <div class="alert alert-success mb-4 m-0" role="alert">
+      <div><%= flash[:succes] %></div>
+
   </div>
-  <% @numero = "0" %>
   <% end %>
-  <%i=0%>
 
-  <% if @numero2 == "1" %>
-  <div class="alert alert-success" role="alert">
-    <a>Gossip supprimé avec succes</a>
+      <% if flash[:edit] %>
+
+     <div class="alert alert-success mb-4 m-0" role="alert">
+      <div><%= flash[:edit] %></div>
+
   </div>
-  <% @numero2 = "0" %>
   <% end %>
-  <%z=0%>
-
-  <div class="container-fluid" style="margin-top: 130px">
-    <div class="row justify-content-center mt-5">
-
-      <div class="col-xl-6 offset-xl-1" >
-
-        <%Gossip.all.order("created_at DESC").each do |nb|%>
-        <div class="row shadow-sm bg-white justify-content-between rounded-sm pb-3 pt-3 pl-3 mb-3 text-dark border pr-0 m-0">
-         <div class="col border-right">
-
-          <span class="font-italic mogos">
-           <a class="spec" href="user/<%=nb.user.id%>"> <%=nb.user.first_name%> <%=nb.user.last_name%></a> 
-         </span>
-         <br>
-         <a href="/gossips/<%=nb.id%>" class="link">
-          <%=nb.title%> 
-          <br>
-          <span class="text-black-50"><%=nb.content%> <span>
-          </a>
-        </div>
-        
-        <div class="col-auto d-flex justify-content-center align-items-center text-black-50 m-0 p-0">
-
-          <%if current_user.has(nb.id)%>       
-          <%= form_tag gossip_gossiplike_path(nb.id,Like.where(:gossip_id =>nb.id,:user_id => current_user.id).first.id
-), method: "delete" do %>
-          <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-heart fa-2x spec ml-3 mr-3"></button>
-          <%end%>
-
-          <%else%>
-
-           <%= form_tag gossip_gossiplike_index_path(nb.id), method: "post" do %>
-          <button type="submit" name="buto" value="yes" id="fontaws" class="far fa-heart fa-2x spec ml-3 mr-3"></button>
-          <%end%>
-          
-
-          <%end%>
-          <%if current_user == nb.user%>
-          <%= form_tag gossip_path(nb), method: "delete" do %>
-          <button  type="submit" id="fontaws" name="<%=nb%>" class="fas fa-times fa-2x spec mr-3"></button>
-          <%end%>
-          <%end%>
 
 
-        </div>
-      </div>
-      <%i=0%>
+      <% if flash[:delete] %>
+
+     <div class="alert alert-info mb-4 m-0" role="alert">
+      <div><%= flash[:delete] %></div>
+
+  </div>
+  <% end %>
+
+
+
+    <%Gossip.all.order("created_at DESC").each do |nb|%>
+    <div class="row shadow-sm bg-white justify-content-between rounded-sm pb-3 pt-3 pl-3 mb-3 text-dark border pr-0 m-0">
+     <div class="col border-right">
+
+      <span class="font-italic mogos">
+       <a class="spec" href="user/<%=nb.user.id%>"> <%=nb.user.first_name%> <%=nb.user.last_name%></a> 
+     </span>
+     <br>
+     <a href="/gossips/<%=nb.id%>" class="link">
+      <%=nb.title%> 
+      <br>
+      <span class="text-black-50"><%=nb.content%> <span>
+      </a>
+    </div>
+
+    <div class="col-auto d-flex justify-content-center align-items-center text-black-50 m-0 p-0">
+
+      <%if current_user.has(nb.id)%>       
+      <%= form_tag gossip_gossiplike_path(nb.id,Like.where(:gossip_id =>nb.id,:user_id => current_user.id).first.id
+      ), method: "delete" do %>
+      <button type="submit" name="buto" value="yes" id="fontaws" class="fas fa-heart fa-2x spec ml-3 mr-3"></button>
       <%end%>
 
+      <%else%>
+
+      <%= form_tag gossip_gossiplike_index_path(nb.id), method: "post" do %>
+      <button type="submit" name="buto" value="yes" id="fontaws" class="far fa-heart fa-2x spec ml-3 mr-3"></button>
+      <%end%>
+
+
+      <%end%>
+      <%if current_user == nb.user%>
+      <%= form_tag gossip_path(nb), method: "delete" do %>
+      <button  type="submit" id="fontaws" name="<%=nb%>" class="fas fa-times fa-2x spec mr-3"></button>
+      <%end%>
+      <%end%>
+
+
     </div>
-    <div class="col-auto center-block text-center">
+  </div>
+  <%i=0%>
+  <%end%>
 
-      <div class="card bg-light m-0" style="min-width:10rem; max-width: 20rem;">
-        <div class="card-header">Tag</div>
-        <div class="card-body">
-          <h5 class="card-title">Categorie</h5>
-          <p class="card-text">
-            <%Tag.all.each do |spectag|%>
-            <%=spectag.title%>
-            <%end%>
-          </p>
-        </div>
-      </div>
+</div>
+<div class="col-auto center-block text-center">
+
+  <div class="card bg-light m-0" style="min-width:10rem; max-width: 20rem;">
+    <div class="card-header">Tag</div>
+    <div class="card-body">
+      <h5 class="card-title">Categorie</h5>
+      <p class="card-text">
+        <%Tag.all.each do |spectag|%>
+        <span class="badge badge-dark"><%=spectag.title%></span>
+        <%end%>
+      </p>
+    </div>
+  </div>
 
 
-      <div class="card bg-light mt-4" style="min-width:10rem; max-width: 20rem;">
-        <div class="card-header">Info</div>
-        <div class="card-body">
-          <h5 class="card-title">Il y'a :</h5>
-          <p class="card-text">
-           <%=Gossip.all.size%> gossips.
-           <br>
-           <%=User.all.size%> utilisateurs.
+  <div class="card bg-light mt-4" style="min-width:10rem; max-width: 20rem;">
+    <div class="card-header">Info</div>
+    <div class="card-body">
+      <h5 class="card-title">Il y'a :</h5>
+      <p class="card-text">
+       <%=Gossip.all.size%> gossips.
+       <br>
+       <%=User.all.size%> utilisateurs.
 
-         </p>
-       </div>
-     </div>
-
-     <input type="number" placeholder="x10" step="10" min="0" max="100" id="number">
+     </p>
    </div>
  </div>
+
+</div>
+</div>
 </div>

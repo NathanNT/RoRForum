@@ -2,10 +2,26 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
 
   <div class="container-flex w-100 m-0 p-0">
-    <div class="row justify-content-center m-0 p-0">
+
+<% if flash[:danger] %>
+      <div class="row justify-content-center m-0 p-0">
+      <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded p-0">
+         
+ <div class="alert alert-danger m-0" role="alert">
+  <%= flash[:danger] %>
+       </div>
+    </div>
+</div>
+<% end %>
+ 
+
+
+
+  <div class="row justify-content-center m-0 p-0" style="margin-top: 20px!important; margin-bottom: 20px!important">
+
       <div class="col-11 col-sm-11 col-lg-8 text-center shadow-sm bg-light rounded pt-2">
 
-        <h2 class="h1 font-weight-bold text-center mt-4">Sign up</h2>
+        <h2 class="h1 font-weight-bold text-center mt-4">Sign in</h2>
         <p class="text-center mb-5">Connecte toi :</p>
 
         <div class="row justify-content-center">

@@ -10,7 +10,7 @@ class GossiplikeController < ApplicationController
  end
 def destroy
 if Like.where('gossip_id' => params[:gossip_id], 'user_id' => current_user.id).first.destroy
-      redirect_to "/gossips"
+      redirect_to "/gossips/#{params[:gossip_id]}"
 end
 end
 

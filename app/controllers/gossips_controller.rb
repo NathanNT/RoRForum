@@ -21,6 +21,11 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
 
     if @gossip.save
+      params[:tag].try(:each) do |i|
+        @gossiptag = GossipTag.new('tag_id' => Tag.all.find(i).id,'gossip_id' => @gossip.id)
+        @gossiptag.save
+      end
+      flash[:succes] = "Gossip crée avec succes"
       redirect_to "/gossips"
     else  
       render 'new'
@@ -42,9 +47,10 @@ class GossipsController < ApplicationController
       if @gossip.user_id == current_user.id
         if @gossip.update('user_id' => current_user.id,'title' => params[:title],'content' => params[:content])
           Gossip.order('id ASC')
+          flash[:edit] = "Gossip modifié avec succes"
           redirect_to "/gossips"
         else
-          redirect_to "/gossips"
+          render :edit
         end
       end
     end
@@ -59,6 +65,7 @@ class GossipsController < ApplicationController
       if @gossip.user_id == current_user.id
 
         @gossip.destroy
+        flash[:delete] = "Gossip supprimé avec succes."
         redirect_to "/gossips"
         @@num2="1"
       else

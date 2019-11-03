@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     redirect_to "/gossips"
     # redirige où tu veux, avec un flash ou pas
   else
-    flash.now[:danger] = 'Invalid email/password combination'
+    flash[:danger] = "Combinaison mot de passe/email incorrect"
     render 'new'
   end
 
