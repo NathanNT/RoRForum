@@ -110,14 +110,3 @@
 </div>
 </div>
 </div>
-   <%= form_tag gossip_comments_path(params[:id]), method: "post",class: "w-100 " do %>
-        <div class="row d-flex justify-content-center">
-          <div class="col-12 input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Commentaire</span>
-            </div>
-            <textarea name="content" id="content" class="form-control" aria-label="With textarea"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </div>
-        <% end %>
