@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :gossips do
   	resources :comments do
-  		resources :commentlike, only: [:create, :destroy]
+  		resources :commentlike, except: [:index, :show]
   	end
   	resources :gossiplike, only: [:create, :destroy]
   end

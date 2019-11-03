@@ -1,19 +1,5 @@
 class CommentsController < ApplicationController
 
-  def index
-
-  end
-
-  def show
-    if params[:id].to_i <=0
-      redirect_to "/gossips"
-    end
-
-  end
-
-  def new
-    @comment = Comment.new()
-  end
 
   def create
     @comment = Comment.new('user_id' => current_user.id,'gossip_id' => params[:gossip_id],'content' => params[:content])
