@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
 
  def create
-  @comment = Comment.new('user_id' => current_user.id,'gossip_id' => params[:gossip_id],'content' => params[:content])
+  @comment = Comment.new('user_id' => 1,'gossip_id' => params[:gossip_id],'content' => params[:content])
   puts "bongos"
   puts params[:gossip_id]
   puts params[:content]
