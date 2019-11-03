@@ -22,7 +22,7 @@ puts params[:gossip_id]
 puts params[:content]
 
     if @comment.save
-      redirect_to "/gossips"
+      redirect_to "/gossips/#{params[:gossip_id]}"
       @@comment = "1"
     end
   end
